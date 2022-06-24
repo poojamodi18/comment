@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -16,9 +17,18 @@ public class UserService {
 
     public Map<String,Object> login(User user){
         try {
-            return Collections.singletonMap("user",userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword()));
+            User userDetails = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+            if(userDetails!=null){
+                Map<String,Object> response = new HashMap<>();
+                response.put("Message","User Found");
+                response.put("User",userDetails);
+                return response;
+            }else{
+                return Collections.singletonMap("Message","User Not Found");
+            }
+
         }catch (Exception e){
-            return Collections.singletonMap("message","Failed");
+            return Collections.singletonMap("Message","Failed");
         }
     }
 }
