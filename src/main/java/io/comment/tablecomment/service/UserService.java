@@ -15,20 +15,22 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public static final String MESSAGE = "Message";
+
     public Map<String,Object> login(User user){
         try {
             User userDetails = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
             if(userDetails!=null){
                 Map<String,Object> response = new HashMap<>();
-                response.put("Message","User Found");
+                response.put(MESSAGE,"User Found");
                 response.put("User",userDetails);
                 return response;
             }else{
-                return Collections.singletonMap("Message","User Not Found");
+                return Collections.singletonMap(MESSAGE,"User Not Found");
             }
 
         }catch (Exception e){
-            return Collections.singletonMap("Message","Failed");
+            return Collections.singletonMap(MESSAGE,"Failed");
         }
     }
 }

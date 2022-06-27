@@ -4,9 +4,9 @@ public enum CommentType {
     PARENT("parent"),
     CHILD("child");
 
-    public final String commentType;
+    public final String comment;
 
-    CommentType(String commentType){this.commentType = commentType;}
+    CommentType(String commentType){this.comment = commentType;}
 
-    public String getCommentType(){return commentType;}
+    public String getComment(){return comment;}
 }
