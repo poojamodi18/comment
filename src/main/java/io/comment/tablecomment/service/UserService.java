@@ -33,4 +33,13 @@ public class UserService {
             return Collections.singletonMap(MESSAGE,"Failed");
         }
     }
+
+    public Map<String,Object> creteUser(User user){
+        try{
+            userRepository.save(user);
+            return Collections.singletonMap(MESSAGE,"User Created");
+        }catch (Exception e){
+            return Collections.singletonMap(MESSAGE,"User Not Created");
+        }
+    }
 }
